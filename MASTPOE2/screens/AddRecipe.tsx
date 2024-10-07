@@ -9,22 +9,21 @@ type addRecipeProp = StackNavigationProp<RootStackParamList, 'AddRecipe'>;
 
 export default function AddRecipeScreen() {
     const [NewDish, setNewDish] = useState('');
-    const [Chef, setChef] = useState('');
     const [Rand, setRand] = useState('');
     const [MealDescription, setMealDescription] = useState('');
     const [recipeType, setRecipeType] = useState('starters');
 
     const navigation = useNavigation<addRecipeProp>();
 
-    const handleAddDish = (currentDishes: { starters: any []; mainDish: any[]; deserts: any[] }) => {
-        const newDish = { NewDish, Chef, Rand, MealDescription };
+    const handleAddDish = (currentDishes: { starters: any []; mainDish: any[]; desserts: any[] }) => {
+        const newDish = { NewDish, Rand, MealDescription };
 
         if (recipeType === 'starters'){
             currentDishes.starters.push(newDish);
         }   else if (recipeType === 'mainDish') {
             currentDishes.mainDish.push(newDish);
         }   else if (recipeType === 'desserts') {
-            currentDishes.deserts.push(newDish);
+            currentDishes.desserts.push(newDish);
         }
 
         navigation.navigate('Home', { recipes: currentDishes });
@@ -38,21 +37,21 @@ export default function AddRecipeScreen() {
             onValueChange={(itemValue) => setRecipeType(itemValue)} style={styles.picker}>
                 <Picker.Item label="Starters" value="starters" />
                 <Picker.Item label="Main-Dish" value="mainDish" />
-                <Picker.Item label="Desserts" value="deserts" />
+                <Picker.Item label="Desserts" value="desserts" />
             </Picker>
         </View>
 
-            <Text style={styles.label}>New recipe</Text>
-            <TextInput placeholder='New Recipe' 
+            <Text style={styles.label}>New Dish</Text>
+            <TextInput placeholder='New Dish' 
             onChangeText={newText => setNewDish(newText)} style={styles.input} 
         />
         
             <Text style={styles.label}>Meal Description</Text>
-            <TextInput placeholder='setMealDescription' 
-            onChangeText={newText => setChef(newText)} style={styles.input} 
+            <TextInput placeholder='Meal Description' 
+            onChangeText={newText => setMealDescription(newText)} style={styles.input} 
         />
         
-             <Text style={styles.label}>Rand</Text>
+            <Text style={styles.label}>Rand</Text>
             <TextInput placeholder='Rand' 
             onChangeText={newText => setRand(newText)} style={styles.input} 
         />
@@ -61,7 +60,7 @@ export default function AddRecipeScreen() {
                 title="Add Dish"
                 onPress={() => {
                     const currentRecipes = navigation.getState().routes.find(r => r.name === 'Home')?.params?.recipes ||
-                    { starters: [], mainDish: [], deserts: [] }; 
+                    { starters: [], mainDish: [], desserts: [] }; 
                     handleAddDish(currentRecipes);
                 }}
             />

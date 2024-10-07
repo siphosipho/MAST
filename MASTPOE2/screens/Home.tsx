@@ -11,14 +11,13 @@ type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
 export default function HomeScreen() {
     const route = useRoute<HomeScreenRouteProp>();
 
-    const recipes = route.params?.recipes || { starters: [], mainDish: [], deserts: [] };
+    const recipes = route.params?.recipes || { starters: [], mainDish: [], desserts: [] };
 
     const navigation = useNavigation<homeScreenProp>();
 
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Starters</Text>
-
         <FlatList
             data={recipes.starters}
             keyExtractor={(item, index) => item.toString()}
@@ -44,10 +43,10 @@ export default function HomeScreen() {
             )}
         />
 
-            <Text style={styles.title}>Deserts</Text>
+            <Text style={styles.title}>Desserts</Text>
         <FlatList
-            data={recipes.deserts}
-            keyExtractor={(item) => item.toString()}
+            data={recipes.desserts}
+            keyExtractor={(item, index) => item.toString()}
             renderItem={({ item }) => (
             <View style={styles.recipeDetails}>
                 <Text>New Dish: {item.NewDish}</Text>

@@ -15,8 +15,12 @@ export default function HomeScreen() {
 
     const navigation = useNavigation<homeScreenProp>();
 
+    const totalDishes = recipes.starters.length + recipes.mainDish.length +recipes.desserts.length;
+
     return (
         <View style={styles.container}>
+
+            <Text style={styles.counter}> Total Dishes: {totalDishes}</Text>
             <Text style={styles.title}>Starters</Text>
         <FlatList
             data={recipes.starters}
@@ -69,6 +73,9 @@ const styles = StyleSheet.create({
     container: { flex: 1, padding: 16 },
     title: { fontSize: 24, marginBottom: 16 },
     recipeDetails: { marginBottom: 24 },
+    counter: {fontSize: 20, fontWeight: 'bold', marginBottom: 16},
+    
+    
     
 });
 
